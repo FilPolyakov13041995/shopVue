@@ -53,10 +53,9 @@
               w-48 mx-auto text-slate-50 hover:bg-blue-600 active:bg-blue-900" 
               @click="showInfoBook">Просмотр товара
             </button>
-
             <div v-if="isAdminEntered" class="p-2 text-center">
               <button @click="showWindowDeleteConfirm" class="mr-3 border-b border-gray-700">Удалить</button>
-              <button class="border-b border-gray-700">Изменить</button>
+              <button @click="showBookChangeOptions" class="border-b border-gray-700">Изменить</button>
               <item-window-small
                 v-if="confirmWindow"
                 @closeModal="closeWindowDeleteConfirm">
@@ -66,6 +65,59 @@
                   <button @click="closeWindowDeleteConfirm" class="p-2 border bg-red-500 hover:bg-red-400 rounded-md">Отмена</button>
                 </div>
               </item-window-small>
+              <item-window 
+                @close-modal="closeBookFormUpdate"
+                v-if="showBookDataForUpdate">
+                <h1 class=" text-2xl">Редактирование книги</h1>
+                <form class="p-10" @submit.prevent="upDateBook(booksStore)">
+                  <div class="grid md:grid-cols-2 md:gap-6">
+                    <div class="relative z-0 w-full mb-6 group">
+                      <input type="text" name="title" id="title" v-model="books.title" class="block py-2.5 px-0 w-full text-sm text-gray-900  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                      <label for="title" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300   transform-translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Название книги</label>
+                    </div>
+                    <div class="relative z-0 w-full mb-6 group">
+                      <input type="text" name="author" id="author" v-model="books.author" class="block py-2.5 px-0 w-full text-sm text-gray-900   bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600   dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                      <label for="author" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300  transform-translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600   peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Автор</label>
+                    </div>
+                    <div class="relative z-0 w-full mb-6 group">
+                      <input type="text" name="year" id="year" v-model="books.year" class="block py-2.5 px-0 w-full text-sm text-gray-900   bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600   dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                      <label for="year" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300  transform-translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600   peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Год издания</label>
+                    </div>
+                    <div class="relative z-0 w-full mb-6 group">
+                      <input type="text" name="price" id="price" v-model="books.price" class="block py-2.5 px-0 w-full text-sm text-gray-900  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                      <label for="price" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300   transform-translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Цена</label>
+                    </div>
+                    <div class="relative z-0 w-full mb-6 group">
+                      <input type="text" name="quantity" id="quantity" v-model="books.quantity" class="block py-2.5 px-0 w-full text-sm   text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600   dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                      <label for="quantity" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300  transform-translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600   peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Количество</label>
+                    </div>
+                    <div class="relative z-0 w-full mb-6 group">
+                      <select v-model="books.category" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" required>
+                        <option value="" disabled selected hidden>Выберите категорию</option>
+                        <option value="Художественная">Художественная</option>
+                        <option value="Детская">Детская</option>
+                        <option value="Бизнес-литература">Бизнес-литература</option>
+                        <option value="Компьютеры и Интернет">Компьютеры и Интернет</option>
+                        <option value="Кулинария и напитки">Кулинария и напитки</option>
+                      </select>
+                      <label for="category" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Категория</label>
+                    </div>
+                    <div class="relative z-0 w-full mb-6 group">
+                      <input type="text" name="alt" id="alt" v-model="books.alt" class="block py-2.5 px-0 w-full text-sm text-gray-900  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                      <label for="alt" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300   transform-translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Текст изображения</label>
+                    </div>
+                    <div class="relative z-0 w-full mb-6 group">
+                      <input type="file" name="file" id="file" @change="onFileChange" class="block py-2.5 px-0 w-full text-sm text-gray-900   bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600   dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                      <label for="file" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300  transform-translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600   peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Изображение</label>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="text-sm" for="description">Описание</label>
+                    <textarea id="description" rows="3" v-model="books.description" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" "></textarea>
+                  </div>
+                  <button class=" mt-3 text-white bg-orange-500 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">Сохранить</button>
+                </form> 
+              </item-window>
             </div>
           </div>
         </li>
@@ -74,11 +126,11 @@
 </template>
 
 <script setup>
-import { ref as storageRef, deleteObject } from 'firebase/storage'
+import { ref as storageRef, deleteObject, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { storage } from '@/firebase'
 import { db } from '@/firebase'
 import { auth } from '@/firebase'
-import { doc, getDoc, deleteDoc, collection } from "firebase/firestore"
+import { doc, getDoc, deleteDoc, collection, updateDoc } from "firebase/firestore"
 import { ref, onMounted } from 'vue'
 import ItemWindow from './ItemWindow.vue'
 import ItemWindowSmall from './ItemWindowSmall.vue'
@@ -96,11 +148,54 @@ const props = defineProps({
 const emits = defineEmits(['addToCart'])
 const bookInfoVisibility = ref(false)
 const showFullDescription = ref(false)
+const showBookDataForUpdate = ref(false)
 const showToggle = ref(false)
 
 const isAdminEntered = ref(false)
 const confirmWindow = ref(false)
 
+const onFileChange = (event) => {
+  booksStore.file = event.target.files[0]
+}
+
+const upDateBook = async (booksStore) => {
+  const bookId = props.books.id
+  const bookDocRef = doc(db, 'books', bookId)
+
+  // Проверяем, есть ли в объекте booksStore свойство file
+  if(booksStore && booksStore.file) {
+    // Загружаем новую картинку в Firebase Storage
+    const fileRef = storageRef(storage, `images/${booksStore.file.name}`)
+    await uploadBytes(fileRef, booksStore.file)
+    const downloadUrl = await getDownloadURL(fileRef)
+
+    // Обновляем документ книги в Firestore с новыми данными, включая новую картинку
+    await updateDoc(bookDocRef, {
+      title: props.books.title,
+      author: props.books.author,
+      year: props.books.year,
+      price: props.books.price,
+      quantity: props.books.quantity,
+      category: props.books.category,
+      description: props.books.description,
+      image: downloadUrl,
+      alt: props.books.alt
+    })
+  } else {
+    // Если свойства file нет, обновляем документ без картинки
+    await updateDoc(bookDocRef, {
+      title: props.books.title,
+      author: props.books.author,
+      year: props.books.year,
+      price: props.books.price,
+      quantity: props.books.quantity,
+      category: props.books.category,
+      description: props.books.description,
+      alt: props.books.alt
+    })
+  }
+  closeBookFormUpdate()
+}
 
 const removeBook = async () => {
   try {
@@ -120,12 +215,10 @@ const removeBook = async () => {
   } catch (error) {
     console.error(`Ошибка при удалении книги ${bookId}:`, error);
   }
-
   closeWindowDeleteConfirm()
-
 };
 
-async function adminEntered() {
+const adminEntered = async () => {
   const docRef = doc(db, 'users', 'sqeYjwyjJXPJytdlgmRf')
   const docSnap = await getDoc(docRef)
   if(auth.currentUser) {
@@ -133,6 +226,16 @@ async function adminEntered() {
       isAdminEntered.value = true
     }
   }
+}
+
+const showBookChangeOptions = () => {
+  showBookDataForUpdate.value = true
+  document.body.classList.add('modal-open')
+}
+
+const closeBookFormUpdate = () => {
+  showBookDataForUpdate.value = false
+  document.body.classList.remove('modal-open')
 }
 
 const showWindowDeleteConfirm = () => {

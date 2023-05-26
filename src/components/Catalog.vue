@@ -36,8 +36,8 @@
       <form-adding-books></form-adding-books>
     </div>
   </div>
-    <div class="catalog__item bg-white pt-4 grid grid-cols-4 gap-4">
-      <CatalogItem
+    <div class="catalog__item pt-4 flex flex-wrap gap-4">
+      <CatalogItem class="flex-auto w-60 h-2/4"
         v-for="book in booksStore.filterBooks"
         :key="book.id"
         :books="book"

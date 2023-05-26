@@ -10,18 +10,20 @@ export const useBooksStore = defineStore('booksStore', {
             cart: [],
             filteredBooks: [],
             searchQuery: '',
-            fileUrl: null
+            
+            //Переменные для формы добавления книг
+            title: '',
+            author: '',
+            year: '',
+            price: '',
+            quantity: '',
+            category: '',
+            description: '',
+            alt: '',
+            file: null
         };
     },
     actions: {
-
-        setFileUrl(fileUrl) {
-            this.fileUrl = fileUrl
-        },
-        setBooks(updatedBooks) {
-            this.books = updatedBooks
-        },
-
         getBooks() {
             // Этот метод БЕЗ обновления данных в реальном времени, и работает С async
             // const querySnapshot = await getDocs(collection(db, 'books'))
