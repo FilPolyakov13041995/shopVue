@@ -18,6 +18,7 @@ export const useBooksStore = defineStore('booksStore', {
             price: '',
             quantity: '',
             category: '',
+            sale: '',
             description: '',
             alt: '',
             file: null
@@ -57,6 +58,7 @@ export const useBooksStore = defineStore('booksStore', {
                       price: val.data().price,
                       quantity: val.data().quantity,
                       category: val.data().category,
+                      sale: val.data().sale,
                       image: val.data().image,
                       description: val.data().description,
                       alt: val.data().alt
@@ -64,24 +66,20 @@ export const useBooksStore = defineStore('booksStore', {
                     fbBooks.push(book)
                 })
                 this.books = fbBooks
-                console.log(this.books)
             })
         },
-
+        
         addToCart(book) {
-            if(this.cart.length) {
-                let bookIsPresent = false
-                this.cart.map(item => {
-                    if(item.id === book.id) {
-                        bookIsPresent = true
-                        item.quantity++
-                    }
-                });
-                if(!bookIsPresent) {
-                    this.cart.push(book)
-                }
+            const priceWithDiscount = book.price - (book.price * book.sale / 100)
+            const cartItem = this.cart.find(item => item.id === book.id)
+            if (cartItem) {
+              cartItem.quantity += 1
             } else {
-                this.cart.push(book)
+              this.cart.push({
+                ...book,
+                quantity: 1,
+                priceWithDiscount
+              })
             }
         },
 
@@ -109,7 +107,10 @@ export const useBooksStore = defineStore('booksStore', {
 
     getters: {
         cartTotal(state) {
-            return state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)
+            return state.cart.reduce((sum, item) => {
+              const price = item.priceWithDiscount || item.price
+              return sum + price * item.quantity
+            }, 0).toFixed(2)
         },
         filterBooks(state) {
             if(state.searchQuery) {

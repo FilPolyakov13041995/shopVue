@@ -8,6 +8,7 @@
             <p class="text-2xl">{{ cartItem.title }}</p>
             <p class="text-xl">{{ cartItem.author }}</p>
             <p>{{ cartItem.year }}</p>
+            <p v-if="cartItem.sale > 0" class="text-lg text-white bg-red-400 text-center rounded-md w-12" >-{{ cartItem.sale }}%</p>
         </div>
         <div class="inline-flex p-1">
             <div 
@@ -22,9 +23,12 @@
                 +
             </div>
         </div>
-        <p class="text-lg mt-1">
-            <b>{{ (cartItem.price * cartItem.quantity).toFixed(2) }} р.</b>
-        </p>
+        <div v-if="cartItem.sale > 0">
+            <p class="text-lg text-red-500 mt-1">{{ getTotalPrice(cartItem) }}</p>
+        </div>
+        <div v-else>
+            <p class="text-lg mt-1">{{ cartItem.price * cartItem.quantity }}</p>
+        </div>
         <button 
           class="border bg-red-600 rounded-md text-slate-50 mt-1 
           p-1 hover:bg-red-500 active:bg-red-600"
@@ -34,7 +38,8 @@
 </template>
 
 <script setup>
-
+import { useBooksStore } from '@/stores/books';
+const booksStore = useBooksStore()
 const props = defineProps({
     cartItem: Object,
     required: true,
@@ -42,5 +47,14 @@ const props = defineProps({
 })
 
 const emits = defineEmits(['removeCartItem', 'addCountQty', 'reduceCountQty'])
+
+
+const getTotalPrice = (cartItem) => {
+    const priceWithDiscount = cartItem.price - (cartItem.price * cartItem.sale / 100)
+    const totalPrice = priceWithDiscount * cartItem.quantity
+    return totalPrice.toFixed(2) + ' руб.'
+}
+
+
 
 </script>
