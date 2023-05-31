@@ -1,18 +1,18 @@
 <template>
     <div class="form__adding">
-        <button
+        <!-- <button
           v-if="isAdminEntered"
           @click="showFormForBooks"
           class="text-base text-center cursor-pointer bg-teal-400
           font-medium w-60 rounded-md hover:bg-teal-300">Добавить книгу в каталог
-        </button>
-        <item-window 
+        </button> -->
+        <!-- <item-window
           v-if="formVisibility"
-          @closeModal="closeFormModal">
-          <h1 class="text-2xl text-center">Добавление книги</h1>
-          <form 
-          @submit.prevent="addBook"
-          class="p-8">
+          @closeModal="closeFormModal"> -->
+          <h1 class="text-2xl text-center p-2">Добавление книги</h1>
+          <form
+            @submit.prevent="addBook"
+            class="p-6">
           <div class="grid md:grid-cols-2 md:gap-6">
             <div class="relative z-0 w-full mb-5 group">
               <input type="text" name="title" id="title" v-model="booksStore.title" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
@@ -66,21 +66,22 @@
           </div>
           <button type="submit" class="text-white bg-orange-500 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Добавить</button>
           </form>
-        </item-window>
+        <!-- </item-window> -->
     </div>
 </template>
 
 <script setup>
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { storage } from '@/firebase'
-import ItemWindow from './ItemWindow.vue'
+// import ItemWindow from './ItemWindow.vue'
 import { db } from '@/firebase'
 import { auth } from '@/firebase'
 import { doc, getDoc, addDoc, collection } from "firebase/firestore";
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router';
 import { useBooksStore } from '@/stores/books'
 
-
+const router = useRouter()
 const booksStore = useBooksStore()
 
 const onFileChange = (event) => {
@@ -119,11 +120,12 @@ const addBook = async () => {
   booksStore.description = ''
   booksStore.alt = ''
   
-  closeFormModal()
+  // closeFormModal()
+  router.push('/catalog')
   
 }
 
-const formVisibility = ref(false)
+// const formVisibility = ref(false)
 const isAdminEntered = ref(false)
 
 const adminEntered = async () => {
@@ -136,15 +138,15 @@ const adminEntered = async () => {
   }
 }
 
-const showFormForBooks = () => {
-  formVisibility.value = true
-  document.body.classList.add('modal-open')
-}
+// const showFormForBooks = () => {
+//   formVisibility.value = true
+//   document.body.classList.add('modal-open')
+// }
 
-const closeFormModal = () => {
-  formVisibility.value = false
-  document.body.classList.remove('modal-open')
-}
+// const closeFormModal = () => {
+//   formVisibility.value = false
+//   document.body.classList.remove('modal-open')
+// }
 
 onMounted(() => {
     adminEntered()

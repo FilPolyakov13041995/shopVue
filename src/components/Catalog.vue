@@ -1,14 +1,25 @@
 <template>
   <div class="catalog">
     <h2 class="text-2xl p-2 bg-sky-800 text-white">Каталог товаров</h2>
-    <div v-if="!searchQuery.length" class="filter flex">
-      <div class="select p-2 relative">
+    <div v-if="!searchQuery.length" class="filter flex p-2 justify-center xs:flex-col xs:items-center md:flex-row">
+      <div class="p-2 relative">
+        <router-view>
+          <router-link to="/addingBook">
+            <button
+              v-if="isAdminEntered"
+              class="text-base text-center cursor-pointer bg-teal-400
+              font-medium w-60 rounded-md hover:bg-teal-300">Добавить книгу в каталог
+            </button>
+          </router-link>
+        </router-view>
+    </div>
+      <div class="select p-2 relative z-10">
         <p @click="isCategoriesVisible = !isCategoriesVisible"
           class="text-base text-center cursor-pointer bg-slate-200 
           font-medium w-60 rounded-md hover:bg-slate-300">{{ currentCategory }}
         </p>
       <div 
-        class="options p-2 w-60 bg-gray-50 rounded-md  absolute left-2" 
+        class="options p-2 w-60 bg-gray-50 rounded-md absolute left-2" 
         v-if="isCategoriesVisible">
           <button
             class="block"
@@ -32,11 +43,9 @@
           <button @click="sortOldBooks">По году <b>(сначала старые)</b></button>
         </div>
     </div>
-    <div class="p-2 relative">
-      <form-adding-books></form-adding-books>
-    </div>
+    
   </div>
-    <div class="catalog__item pt-4 flex flex-wrap gap-4">
+    <div class="catalog__item flex flex-wrap gap-4 pl-2 pr-2">
       <CatalogItem class="flex-auto w-60 h-2/4"
         v-for="book in booksStore.filterBooks"
         :key="book.id"
@@ -48,16 +57,19 @@
 </template>
 
 <script setup>
+import { db } from '@/firebase'
+import { auth } from '@/firebase'
+import { doc, getDoc } from "firebase/firestore"
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useBooksStore } from '@/stores/books';
 import CatalogItem from './CatalogItem.vue'
-import FormAddingBooks from './FormAddingBooks.vue';
 
 const booksStore = useBooksStore()
 const currentCategory = ref('Выбрать категорию')
 const currentSort = ref('Сортировать')
 const isCategoriesVisible = ref(false)
 const isSortVisible = ref(false)
+const isAdminEntered = ref(false)
 const searchQuery = computed(() => booksStore.getSearchQuery)
 
 
@@ -72,6 +84,7 @@ onUnmounted(() => {
 
 onMounted(() => {
   booksStore.getBooks()
+  adminEntered()
   filterByCategory('Все категории')
   document.addEventListener('click', hideSelect.bind(isCategoriesVisible, isSortVisible), true)
 })
@@ -130,5 +143,15 @@ const sortOldBooks = () => {
   currentSort.value = 'Самые старые'
 }
 
-</script>
 
+const adminEntered = async () => {
+  const docRef = doc(db, 'users', 'sqeYjwyjJXPJytdlgmRf')
+  const docSnap = await getDoc(docRef)
+  if(auth.currentUser) {
+    if(docSnap.data().uid === auth.currentUser.uid) {
+      isAdminEntered.value = true
+    }
+  }
+}
+
+</script>

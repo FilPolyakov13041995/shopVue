@@ -3,6 +3,7 @@ import Account from '../views/AccountRouter.vue';
 import Cart from '../views/CartRouter.vue';
 import Catalog from '../views/CatalogRouter.vue';
 import HomeRouter from '../views/HomeRouter.vue';
+import FormAddingBooks from '../views/AddingBook.vue';
 
 const routes = [
   {
@@ -27,6 +28,11 @@ const routes = [
     path: '/catalog',
     name: 'catalog',
     component: Catalog
+  },
+  {
+    path: '/addingBook',
+    name: 'addingBook',
+    component: FormAddingBooks
   }
 ];
 
