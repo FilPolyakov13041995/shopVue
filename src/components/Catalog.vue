@@ -45,7 +45,7 @@
     </div>
     
   </div>
-    <div class="catalog__item flex flex-wrap gap-4 pl-2 pr-2">
+    <div class="catalog__item flex flex-wrap gap-4 pl-2 pr-2 mb-20">
       <CatalogItem class="flex-auto w-60 h-2/4"
         v-for="book in booksStore.filterBooks"
         :key="book.id"
@@ -71,7 +71,6 @@ const isCategoriesVisible = ref(false)
 const isSortVisible = ref(false)
 const isAdminEntered = ref(false)
 const searchQuery = computed(() => booksStore.getSearchQuery)
-
 
 const hideSelect = () => {
     isCategoriesVisible.value = false
@@ -142,7 +141,6 @@ const sortOldBooks = () => {
   }
   currentSort.value = 'Самые старые'
 }
-
 
 const adminEntered = async () => {
   const docRef = doc(db, 'users', 'sqeYjwyjJXPJytdlgmRf')

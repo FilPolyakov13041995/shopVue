@@ -3,7 +3,7 @@ import Account from '../views/AccountRouter.vue';
 import Cart from '../views/CartRouter.vue';
 import Catalog from '../views/CatalogRouter.vue';
 import HomeRouter from '../views/HomeRouter.vue';
-import FormAddingBooks from '../views/AddingBook.vue';
+import AddingBook from '../views/AddingBook.vue';
 
 const routes = [
   {
@@ -32,8 +32,8 @@ const routes = [
   {
     path: '/addingBook',
     name: 'addingBook',
-    component: FormAddingBooks
-  }
+    component: AddingBook,
+  },
 ];
 
 const router = createRouter({

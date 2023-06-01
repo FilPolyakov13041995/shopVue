@@ -19,8 +19,3 @@
 <script setup>
 const emits = defineEmits(['closeModal'])
 </script>   
-
-
-<!-- <div class="modal__content p-10">
-    <slot></slot>
-</div> -->

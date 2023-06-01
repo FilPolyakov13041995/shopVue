@@ -71,6 +71,9 @@
               w-48 mx-auto text-slate-50 hover:bg-blue-600 active:bg-blue-900" 
               @click="showInfoBook">Просмотр товара
             </button>
+
+            <!-- DELETE / UPDATE -->
+
             <div v-if="isAdminEntered" class="p-2 text-center">
               <button @click="showWindowDeleteConfirm" class="mr-3 border-b border-gray-700">Удалить</button>
               <button @click="showBookChangeOptions" class="border-b border-gray-700">Изменить</button>
@@ -91,23 +94,23 @@
                   <div class="grid md:grid-cols-2 md:gap-6">
                     <div class="relative z-0 w-full group">
                       <input type="text" name="title" id="title" v-model="books.title" class="block py-2.5 px-0 w-full text-sm text-gray-900  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                      <label for="title" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300   transform-translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Название книги</label>
+                      <label class="text-xs text-gray-500" for="title">Название книги</label>
                     </div>
                     <div class="relative z-0 w-full mb-2 group">
                       <input type="text" name="author" id="author" v-model="books.author" class="block py-2.5 px-0 w-full text-sm text-gray-900   bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600   dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                      <label for="author" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300  transform-translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600   peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Автор</label>
+                      <label class="text-xs text-gray-500" for="author">Автор</label>
                     </div>
                     <div class="relative z-0 w-full mb-2 group">
                       <input type="text" name="year" id="year" v-model="books.year" class="block py-2.5 px-0 w-full text-sm text-gray-900   bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600   dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                      <label for="year" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300  transform-translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600   peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Год издания</label>
+                      <label class="text-xs text-gray-500" for="year">Год издания</label>
                     </div>
                     <div class="relative z-0 w-full mb-2 group">
                       <input type="text" name="price" id="price" v-model="books.price" class="block py-2.5 px-0 w-full text-sm text-gray-900  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                      <label for="price" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300   transform-translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Цена</label>
+                      <label for="price" class="text-xs text-gray-500">Цена</label>
                     </div>
                     <div class="relative z-0 w-full mb-2 group">
                       <input type="text" name="quantity" id="quantity" v-model="books.quantity" class="block py-2.5 px-0 w-full text-sm   text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600   dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                      <label for="quantity" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300  transform-translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600   peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Количество</label>
+                      <label for="quantity" class="text-xs text-gray-500">Количество</label>
                     </div>
                     <div class="relative z-0 w-full mb-2 group">
                       <select name="category" id="category" v-model="books.category" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" >
@@ -118,24 +121,24 @@
                         <option value="Компьютеры и Интернет">Компьютеры и Интернет</option>
                         <option value="Кулинария и напитки">Кулинария и напитки</option>
                       </select>
-                      <label for="category" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Категория</label>
+                      <label for="category" class="text-xs text-gray-500">Категория</label>
                     </div>
                     <div class="relative z-0 w-full mb-2 group">
                       <input type="text" name="sale" id="sale" v-model="books.sale" class="block py-2.5 px-0 w-full text-sm text-gray-900  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                      <label for="sale" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300   transform-translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Установить скидку</label>
+                      <label for="sale" class="text-xs text-gray-500">Скидка</label>
                     </div>
                     <div class="relative z-0 w-full mb-2 group">
                       <input type="text" name="alt" id="alt" v-model="books.alt" class="block py-2.5 px-0 w-full text-sm text-gray-900  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                      <label for="alt" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300   transform-translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Текст изображения</label>
+                      <label for="alt" class="text-xs text-gray-500">Текст изображения</label>
                     </div>
                     <div class="relative z-0 w-full mb-2 group">
                       <input type="file" name="file" id="file" @change="onFileChange" class="block py-2.5 px-0 w-full text-sm text-gray-900   bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600   dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                      <label for="file" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300  transform-translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600   peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Изображение</label>
+                      <label for="file" class="text-xs text-gray-500">Изображение</label>
                     </div>
                   </div>
                   <div>
-                    <label class="text-sm" for="description">Описание</label>
                     <textarea name="description" id="description" rows="3" v-model="books.description" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" "></textarea>
+                    <label class="text-xs text-gray-500" for="description">Описание</label>
                   </div>
                   <button class=" mt-3 text-white bg-orange-500 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">Сохранить</button>
                 </form> 
