@@ -4,6 +4,8 @@ import Cart from '../views/CartRouter.vue';
 import Catalog from '../views/CatalogRouter.vue';
 import HomeRouter from '../views/HomeRouter.vue';
 import AddingBook from '../views/AddingBook.vue';
+import EditBook from '@/components/EditBook.vue';
+// import CatalogItem from '@/components/CatalogItem.vue';
 
 const routes = [
   {
@@ -33,6 +35,17 @@ const routes = [
     path: '/addingBook',
     name: 'addingBook',
     component: AddingBook,
+  },
+  {
+    path: '/edit-book/:book',
+    name: 'edit-book',
+    component: EditBook
+    // path: '/edit-book/:book',
+    // name: 'EditBook',
+    // component: EditBook,
+    // props: (route) => ({
+    //   book: route.params.book,
+    // })
   },
 ];
 

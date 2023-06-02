@@ -9,7 +9,7 @@
                     <p class="text-right text-6xl mr-2">&#215;</p>
                 </span>
             </div>
-            <div class="modal__content p-10 max-h-screen overflow-y-auto">
+            <div class="modal__content max-h-screen overflow-y-auto">
                 <slot></slot>
             </div>
         </div>

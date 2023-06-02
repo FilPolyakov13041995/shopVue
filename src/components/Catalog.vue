@@ -62,15 +62,19 @@ import { auth } from '@/firebase'
 import { doc, getDoc } from "firebase/firestore"
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useBooksStore } from '@/stores/books';
+import { useRouter, useRoute } from 'vue-router'
 import CatalogItem from './CatalogItem.vue'
 
 const booksStore = useBooksStore()
+const router = useRouter()
+
 const currentCategory = ref('Выбрать категорию')
 const currentSort = ref('Сортировать')
 const isCategoriesVisible = ref(false)
 const isSortVisible = ref(false)
 const isAdminEntered = ref(false)
 const searchQuery = computed(() => booksStore.getSearchQuery)
+
 
 const hideSelect = () => {
     isCategoriesVisible.value = false
