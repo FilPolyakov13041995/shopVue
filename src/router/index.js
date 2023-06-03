@@ -37,9 +37,9 @@ const routes = [
     component: AddingBook,
   },
   {
-    path: '/edit-book/:book',
-    name: 'edit-book',
-    component: EditBook
+    path: '/edit-book/',
+    name: 'editBook',
+    component: EditBook,
     // path: '/edit-book/:book',
     // name: 'EditBook',
     // component: EditBook,

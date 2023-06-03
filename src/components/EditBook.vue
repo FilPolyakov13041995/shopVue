@@ -89,7 +89,7 @@ const props = defineProps({
     required: true,
     default: () => {},
   },
-});
+})
 
 
 const onFileChange = (event) => {

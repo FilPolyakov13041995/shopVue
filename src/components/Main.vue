@@ -54,7 +54,7 @@
         <input
             @keyup.enter="search"
             v-model="searchQuery"
-            class="basis-2/5 border xs:p-2.5 md:p-3.5 text-sm rounded-xl focus:ring-sky-400 focus:border-sky-500 border-sky-900" 
+            class="xs:basis-3/5 md:basis-2/5 border xs:p-2.5 md:p-3.5 text-sm rounded-xl focus:ring-sky-400 focus:border-sky-500 border-sky-900" 
             type="search"
             placeholder="Введите название книги">
             <span>

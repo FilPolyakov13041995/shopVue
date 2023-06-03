@@ -12,7 +12,7 @@
             </button>
           </router-link>
         </router-view>
-    </div>
+      </div>
       <div class="select p-2 relative z-10">
         <p @click="isCategoriesVisible = !isCategoriesVisible"
           class="text-base text-center cursor-pointer bg-slate-200 
@@ -64,9 +64,11 @@ import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useBooksStore } from '@/stores/books';
 import { useRouter, useRoute } from 'vue-router'
 import CatalogItem from './CatalogItem.vue'
+import EditBook from './EditBook.vue';
 
 const booksStore = useBooksStore()
 const router = useRouter()
+const route = useRoute()
 
 const currentCategory = ref('Выбрать категорию')
 const currentSort = ref('Сортировать')
@@ -157,3 +159,7 @@ const adminEntered = async () => {
 }
 
 </script>
+
+<!-- :to="`/book/${book.id}`" -->
+
+<!-- :to="{ name: 'editBook', params: { id: book.id }}" -->
