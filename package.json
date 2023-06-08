@@ -7,7 +7,6 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "@tailwindcss/forms": "^0.5.3",
     "autoprefixer": "^10",
     "axios": "^1.4.0",
     "core-js": "^3.8.3",

@@ -20,8 +20,9 @@
     </div>
   </div>
   <div v-if="currentUser" class="text-center mb-16">
+    <h2 class="xs:text-xl xs:text-center md:text-2xl p-2 bg-sky-800 text-white">Личный кабинет</h2>
       <h2 class="p-4 xs:text-2xl">Добро пожаловать!</h2>
-      <div class="border rounded-xl xs:w-5/6 mx-auto p-3">
+      <div class="border rounded-xl xs:w-5/6 md:w-3/5 lg:w-2/5 mx-auto p-3">
         <p class="text-lg">Ваша почта: <b><span class="text-xl pl-1 pr-1 ml-2 rounded-lg">{{ email }}</span></b></p>
         <p class="text-lg">Имя пользователя: <b><span class="text-xl pl-1 pr-1 ml-2 rounded-sm">{{ username }}</span></b></p>
         <p class="text-lg">Статус пользователя: <b><span class="text-lg pl-1 pr-1 ml-2 rounded-sm">{{ userStatus }}</span></b></p>

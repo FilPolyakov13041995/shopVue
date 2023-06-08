@@ -70,14 +70,9 @@ import { db } from '@/firebase'
 import { auth } from '@/firebase'
 import { doc, getDoc, deleteDoc, collection, updateDoc } from "firebase/firestore"
 import { ref, onMounted } from 'vue'
-// import { useRouter, useRoute } from 'vue-router'
-// import ItemWindow from './ItemWindow.vue'
-import ItemWindowSmall from './ItemWindowSmall.vue'
 import { useBooksStore } from '@/stores/books';
 
 const booksStore = useBooksStore()
-// const router = useRouter()
-// const route = useRoute()
 const isAdminEntered = ref(false)
 const showBookDataForUpdate = ref(false)
 const confirmWindow = ref(false)
@@ -174,7 +169,6 @@ const showDeleteBlock = () => {
 
 const showBookChangeOptions = () => {
   showBookDataForUpdate.value = !showBookDataForUpdate.value
-  // document.body.classList.add('modal-open')
 }
 
 const closeDeleteBlock = () => {

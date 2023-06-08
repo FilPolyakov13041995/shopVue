@@ -44,19 +44,26 @@
 </div>
 
 <!-- Меню на больших устройствах -->
-    <nav class="header bg-slate-300 flex flex-row xs:gap-2 md:gap-4 items-center justify-center p-2">
+    <nav class="header bg-slate-300 flex flex-row xs:gap-2 md:gap-4 items-center justify-center px-4 py-2">
         <router-link to="/">
             <a href="#"><img class="xs:w-24 md:w-52" src="../assets/SHOP.png" alt="Logo"></a>
         </router-link>
         <router-link class="xs:hidden md:block border p-3 rounded-xl border-sky-900 hover:bg-gray-100 
             ease-in duration-300" to="/catalog">Каталог
         </router-link>
-        <input
+        <div class="relative flex items-center xs:basis-3/5 md:basis-2/5">
+            <input
             @keyup.enter="search"
             v-model="searchQuery"
-            class="xs:basis-3/5 md:basis-2/5 border xs:p-2.5 md:p-3.5 text-sm rounded-xl focus:ring-sky-400 focus:border-sky-500 border-sky-900" 
-            type="search"
+            class="w-full border-none xs:p-2.5 md:p-3.5 text-sm rounded-xl focus:outline-none" 
             placeholder="Введите название книги">
+            <span
+              v-if="searchQuery"
+              @click="searchQuery = ''"
+              class="absolute right-2 text-sm border-b text-gray-400 cursor-pointer">
+              очистить
+            </span>
+        </div>
             <span>
                 <button
                     @click="search"
@@ -70,9 +77,9 @@
             ease-in duration-300" to="/account">Аккаунт
         </router-link>
         <router-link class=" xs:hidden md:block border p-3 rounded-xl border-sky-900 hover:bg-gray-100 
-            ease-in duration-300" to="/cart">Корзина 
+            ease-in duration-300 relative" to="/cart">Корзина 
             <span v-if="booksStore.cart.length" 
-                class="bg-orange-500 absolute top-9 pl-2 pr-2 
+                class="bg-orange-500 absolute bottom-9 pl-2 pr-2 
                 rounded-xl text-white">{{ booksStore.cart.length }}
             </span>
         </router-link>
@@ -101,5 +108,3 @@ const search = () => {
 }
 
 </script>
-
-

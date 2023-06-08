@@ -1,14 +1,5 @@
 <template>
     <div class="form__adding">
-        <!-- <button
-          v-if="isAdminEntered"
-          @click="showFormForBooks"
-          class="text-base text-center cursor-pointer bg-teal-400
-          font-medium w-60 rounded-md hover:bg-teal-300">Добавить книгу в каталог
-        </button> -->
-        <!-- <item-window
-          v-if="formVisibility"
-          @closeModal="closeFormModal"> -->
           <h1 class="text-2xl text-center p-2">Добавление книги</h1>
           <form
             @submit.prevent="addBook"
@@ -66,14 +57,12 @@
           </div>
           <button type="submit" class="text-white bg-orange-500 hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Добавить</button>
           </form>
-        <!-- </item-window> -->
     </div>
 </template>
 
 <script setup>
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { storage } from '@/firebase'
-// import ItemWindow from './ItemWindow.vue'
 import { db } from '@/firebase'
 import { auth } from '@/firebase'
 import { doc, getDoc, addDoc, collection } from "firebase/firestore";
@@ -120,12 +109,10 @@ const addBook = async () => {
   booksStore.description = ''
   booksStore.alt = ''
   
-  // closeFormModal()
   router.push('/catalog')
   
 }
 
-// const formVisibility = ref(false)
 const isAdminEntered = ref(false)
 
 const adminEntered = async () => {
@@ -137,16 +124,6 @@ const adminEntered = async () => {
     }
   }
 }
-
-// const showFormForBooks = () => {
-//   formVisibility.value = true
-//   document.body.classList.add('modal-open')
-// }
-
-// const closeFormModal = () => {
-//   formVisibility.value = false
-//   document.body.classList.remove('modal-open')
-// }
 
 onMounted(() => {
     adminEntered()

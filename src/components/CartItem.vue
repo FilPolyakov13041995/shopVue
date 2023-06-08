@@ -1,14 +1,12 @@
 <template>
-    <div class="cart__item w-4/5 shadow-xl rounded-xl m-auto mt-4 p-4 flex
-        flex-row justify-start items-start gap-12">
-        <!-- <img class="w-36 h-auto" :src="require('../assets/images/' + cartItem.image)" 
-            :alt="cartItem.alt"> -->
-            <img class="w-36 h-auto" :src="cartItem.image" :alt="cartItem.alt">
-        <div>
-            <p class="text-2xl">{{ cartItem.title }}</p>
-            <p class="text-xl">{{ cartItem.author }}</p>
-            <p>{{ cartItem.year }}</p>
-            <p v-if="cartItem.sale > 0" class="text-lg text-white bg-red-400 text-center rounded-md w-12" >-{{ cartItem.sale }}%</p>
+    <div class="cart__item w-4/5 shadow-xl rounded-xl m-auto mt-4 p-4 flex xs:flex-col xs:items-center xs:gap-4
+         md:flex-col md:justify-center md:items-center lg:flex-row lg:justify-center lg:items-start lg:gap-12">
+            <img class="xs:w-40 md:w-48 lg:w-36 h-auto" :src="cartItem.image" :alt="cartItem.alt">
+        <div class="">
+            <p class="xs:text-2xl md:text-3xl lg:text-2xl xs:text-center md:text-center lg:text-left">{{ cartItem.title }}</p>
+            <p class="text-xl xs:text-center md:text-center lg:text-left">{{ cartItem.author }}</p>
+            <p class="xs:text-center md:text-center lg:text-left">{{ cartItem.year }}</p>
+            <p v-if="cartItem.sale > 0" class="text-lg text-white bg-red-400 xs:mx-auto md:mx-auto lg:mx-0 text-center rounded-md w-12" >-{{ cartItem.sale }}%</p>
         </div>
         <div class="inline-flex p-1">
             <div 
@@ -24,10 +22,10 @@
             </div>
         </div>
         <div v-if="cartItem.sale > 0">
-            <p class="text-lg text-red-500 mt-1">{{ getTotalPrice(cartItem) }}</p>
+            <p class="text-lg text-red-500 mt-1">{{ cartItem.discountPrice * cartItem.quantity }}</p>
         </div>
         <div v-else>
-            <p class="text-lg mt-1">{{ cartItem.price * cartItem.quantity }}</p>
+            <p class="text-lg mt-1">{{ cartItem.price * cartItem.quantity }} р.</p>
         </div>
         <button 
           class="border bg-red-600 rounded-md text-slate-50 mt-1 
@@ -47,14 +45,5 @@ const props = defineProps({
 })
 
 const emits = defineEmits(['removeCartItem', 'addCountQty', 'reduceCountQty'])
-
-
-const getTotalPrice = (cartItem) => {
-    const priceWithDiscount = cartItem.price - (cartItem.price * cartItem.sale / 100)
-    const totalPrice = priceWithDiscount * cartItem.quantity
-    return totalPrice.toFixed(2) + ' руб.'
-}
-
-
 
 </script>

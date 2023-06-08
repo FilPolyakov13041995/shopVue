@@ -1,6 +1,6 @@
 <template>
     <div class="account">
-      <h2 class="text-2xl p-2 bg-sky-800 text-white">Аккаунт</h2>
+      <h2 class="xs:text-xl xs:text-center md:text-2xl p-2 bg-sky-800 text-white">Личный кабинет</h2>
       <p class="text-2xl text-center p-4">Регистрация</p>
       <div vi class="flex flex-col items-center justify-center">
         <form 

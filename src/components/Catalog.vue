@@ -1,14 +1,16 @@
 <template>
   <div class="catalog">
-    <h2 class="text-2xl p-2 bg-sky-800 text-white">Каталог товаров</h2>
+    <h2 class="xs:text-xl xs:text-center md:text-2xl p-2 bg-sky-800 text-white">Каталог товаров</h2>
     <div v-if="!searchQuery.length" class="filter flex p-2 justify-center xs:flex-col xs:items-center md:flex-row">
       <div class="p-2 relative">
         <router-view>
           <router-link to="/addingBook">
-            <button
-              v-if="isAdminEntered"
-              class="text-base text-center cursor-pointer bg-teal-400
-              font-medium w-60 rounded-md hover:bg-teal-300">Добавить книгу в каталог
+            <button 
+              :disabled="!isAdminEntered"
+              class="text-base text-center cursor-pointer bg-teal-400 font-medium w-60 rounded-md hover:bg-teal-300 mobile-tooltip"
+              :class="{ 'bg-teal-800 hover:bg-teal-700 text-slate-200': !isAdminEntered }"
+              :title="!isAdminEntered ? 'Вы должны войти как администратор, чтобы добавить книгу' : '' ">
+              Добавить книгу в каталог
             </button>
           </router-link>
         </router-view>
@@ -39,6 +41,7 @@
         v-if="isSortVisible">
           <button class="block" @click="sortAscendingPrice">По возрастанию цены</button>
           <button @click="sortDescendingPrice">По убыванию цены</button>
+          <button class="block" @click="sortDiscount">По скидке <b></b></button>
           <button @click="sortNewBooks">По году <b>(сначала новые)</b></button>
           <button @click="sortOldBooks">По году <b>(сначала старые)</b></button>
         </div>
@@ -61,14 +64,11 @@ import { db } from '@/firebase'
 import { auth } from '@/firebase'
 import { doc, getDoc } from "firebase/firestore"
 import { ref, onMounted, onUnmounted, computed } from 'vue';
-import { useBooksStore } from '@/stores/books';
-import { useRouter, useRoute } from 'vue-router'
+import { useBooksStore } from '@/stores/books'
 import CatalogItem from './CatalogItem.vue'
-import EditBook from './EditBook.vue';
 
 const booksStore = useBooksStore()
-const router = useRouter()
-const route = useRoute()
+
 
 const currentCategory = ref('Выбрать категорию')
 const currentSort = ref('Сортировать')
@@ -104,6 +104,7 @@ const categories = ref([
 ])
 
 const filterByCategory = (category) => {
+  currentSort.value = 'Сортировать'
   if(category === 'Все категории') {
     booksStore.filteredBooks = booksStore.books
   } else {
@@ -112,20 +113,21 @@ const filterByCategory = (category) => {
   currentCategory.value = category
 }
 
+
 const sortAscendingPrice = () => {
   if(booksStore.filteredBooks.length) {
-    booksStore.filteredBooks.sort((a, b) => a.price - b.price)
+    booksStore.filteredBooks.sort((a, b) => a.discountPrice - b.discountPrice)
   } else {
-    booksStore.books.sort((a, b) => a.price - b.price)
+    booksStore.books.sort((a, b) => a.discountPrice - b.discountPrice)
   }
   currentSort.value = 'По возрастанию цены'
 }
 
 const sortDescendingPrice = () => {
   if(booksStore.filteredBooks.length) {
-    booksStore.filteredBooks.sort((a, b) => b.price - a.price)
+    booksStore.filteredBooks.sort((a, b) => b.discountPrice - a.discountPrice)
   } else {
-    booksStore.books.sort((a, b) => b.price - a.price)
+    booksStore.books.sort((a, b) => b.discountPrice - a.discountPrice)
   }
   currentSort.value = 'По убыванию цены'
 }
@@ -148,6 +150,15 @@ const sortOldBooks = () => {
   currentSort.value = 'Самые старые'
 }
 
+const sortDiscount = () => {
+  if(booksStore.filteredBooks.length) {
+    booksStore.filteredBooks.sort((a, b) => b.sale - a.sale)
+  } else {
+    booksStore.books.sort((a, b) => b.sale - a.sale)
+  }
+  currentSort.value = 'По скидке'
+}
+
 const adminEntered = async () => {
   const docRef = doc(db, 'users', 'sqeYjwyjJXPJytdlgmRf')
   const docSnap = await getDoc(docRef)
@@ -160,6 +171,30 @@ const adminEntered = async () => {
 
 </script>
 
-<!-- :to="`/book/${book.id}`" -->
 
-<!-- :to="{ name: 'editBook', params: { id: book.id }}" -->
+<style>
+  /* Стили для всплывающей подсказки на мобильных устройствах */
+  @media only screen and (max-width: 767px) {
+    .mobile-tooltip {
+      position: relative;
+    }
+    .mobile-tooltip::after {
+      content: attr(title);
+      position: absolute;
+      bottom: calc(100% + 0.5rem);
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #b74848;
+      color: #fff;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.75rem;
+      border-radius: 0.25rem;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+    .mobile-tooltip:hover::after {
+      opacity: 1;
+    }
+  }
+</style>

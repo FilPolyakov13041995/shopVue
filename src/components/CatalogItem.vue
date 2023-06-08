@@ -4,7 +4,7 @@
     <item-window 
       v-if="bookInfoVisibility"
       @closeModal="closeInfoModal">
-      <div class="text-center flex xs:flex-col md:flex-row justify-evenly xs:items-center md:items-start p-2 mb-16">
+      <div class="text-center flex xs:flex-col md:flex-row justify-evenly xs:items-center md:items-start p-2 mb-28">
         <div>
           <img class="xs:w-64 h-auto" :src="books.image" :alt="books.alt">
         </div>
@@ -13,7 +13,7 @@
           <p class="text-xl pt-2">{{ books.author }}, {{ books.year }}</p>
           <div v-if="books.sale > 0">
             <div class="flex items-center justify-center gap-3 pt-3">
-              <p class="text-xl text-red-500">{{ books.price - (books.price * books.sale / 100).toFixed(1) }} руб.</p>
+              <p class="text-xl text-red-500">{{ books.discountPrice }} руб.</p>
               <p class="text-lg line-through text-slate-600"><b>{{ books.price }} руб.</b></p>
               <p class="text-lg text-white bg-red-400 rounded-lg w-16" >-{{ books.sale }}%</p>
             </div>
@@ -31,13 +31,13 @@
           </div>
           <button 
             class="border block bg-orange-500 p-2 mt-2 
-            rounded-sm text-slate-50 hover:bg-orange-600 active:bg-orange-700"
+            rounded-md text-slate-50 hover:bg-orange-600 active:bg-orange-700"
             @click="$emit('addToCart', books)">В корзину
           </button>
           <router-view>
             <router-link
               @click="closeInfoModal"
-              class="block rounded-sm p-2 w-44 mt-3 text-center
+              class="block rounded-md p-2 w-44 mt-3 text-center
              bg-slate-200 hover:bg-slate-300" to="/cart">Перейти в корзину
             </router-link>
           </router-view>
@@ -51,7 +51,7 @@
             <p class="text-base">{{ books.author }}, {{ books.year }}</p>
             <div v-if="books.sale > 0">
               <div class="flex justify-center gap-3">
-                <p class="text-xl text-red-500">{{ books.price - (books.price * books.sale / 100).toFixed(1) }} руб.</p>
+                <p class="text-xl text-red-500">{{ books.discountPrice }}</p>
                 <p class="text-lg line-through text-slate-600"><b>{{ books.price }} руб.</b></p>
               </div>
               <p class="text-lg text-white bg-red-400 rounded-lg pl-1 pr-1 w-16 mx-auto" >-{{ books.sale }}%</p>
@@ -85,15 +85,10 @@ import { db } from '@/firebase'
 import { auth } from '@/firebase'
 import { doc, getDoc } from "firebase/firestore"
 import { ref, onMounted } from 'vue'
-// import { useRouter, useRoute } from 'vue-router'
 import ItemWindow from './ItemWindow.vue'
-// import ItemWindowSmall from './ItemWindowSmall.vue'
 import EditBook from './EditBook.vue'
 import { useBooksStore } from '@/stores/books';
 
-// const booksStore = useBooksStore()
-// const router = useRouter()
-// const route = useRoute()
 const props = defineProps({
     books: {
       type: Object,
@@ -121,12 +116,12 @@ const adminEntered = async () => {
 
 const showInfoBook = () => {
   bookInfoVisibility.value = true
-  document.body.classList.add('modal-open')
+  // document.body.classList.add('modal-open')
 }
 
 const closeInfoModal = () => {
   bookInfoVisibility.value = false
-  document.body.classList.remove('modal-open')
+  // document.body.classList.remove('modal-open')
 }
 
 const shortenedDescription = () => {
@@ -151,15 +146,3 @@ onMounted(() => {
 
 </script>
 
-
-<style>
-.books__descr {
-  width: 800px;
-}
-.imgModalBook {
-  width: 300px;
-}
-body.modal-open {
-  overflow: hidden;
-}
-</style>
