@@ -73,7 +73,6 @@ export const useBooksStore = defineStore('booksStore', {
                     fbBooks.push(book)
                 })
                 this.books = fbBooks
-                console.log(this.books)
             })
         },
         
@@ -120,21 +119,20 @@ export const useBooksStore = defineStore('booksStore', {
               return sum + price * item.quantity
             }, 0).toFixed(2)
         },
+        
         filterBooks(state) {
-            if(state.searchQuery) {
-                const query = state.searchQuery.toLowerCase()
-                if (!query) {
-                    return state.books // возвращаем полный массив, если запрос не указан
-                }
-                    return state.books.filter(book => book.title.toLowerCase().includes(query))
-            }
-            if(state.filteredBooks.length) {
+            const query = state.searchQuery ? state.searchQuery.toLowerCase() : ''
+            if (query) {
+              return state.books.filter(book =>
+                book.title.toLowerCase().includes(query)
+              )
+            } else if (state.filteredBooks.length) {
               return state.filteredBooks
             } else {
               return state.books
             }
         },
-        getSearchQuery(state) {
+        getSearchQuery(state) { 
             return state.searchQuery
         },
     },

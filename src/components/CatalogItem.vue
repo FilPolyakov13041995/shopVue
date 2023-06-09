@@ -4,11 +4,11 @@
     <item-window 
       v-if="bookInfoVisibility"
       @closeModal="closeInfoModal">
-      <div class="text-center flex xs:flex-col md:flex-row justify-evenly xs:items-center md:items-start p-2 mb-28">
-        <div>
-          <img class="xs:w-64 h-auto" :src="books.image" :alt="books.alt">
+      <div class="xs:text-center md:text-left w-5/6 mx-auto shadow-2xl rounded-lg mt-10 xs:flex xs:flex-col xs:items-center md:flex md:flex-row md:justify-center md:items-stretch gap-3 p-2 mb-28">
+        <div class="md:basis-1/5/">
+          <img class="xs:w-64 md:w-80" :src="books.image" :alt="books.alt">
         </div>
-        <div>
+        <div class="md:basis-2/5">
           <p class="text-3xl pt-3">{{ books.title }}</p>
           <p class="text-xl pt-2">{{ books.author }}, {{ books.year }}</p>
           <div v-if="books.sale > 0">
@@ -22,7 +22,7 @@
             <p class="text-lg pt-3"><b>{{ books.price }} руб.</b></p>
           </div>
           <div class="container__desc">
-            <p class="books__descr text-justify text-base pt-3 xs:w-full">{{ shortenedDescription() }} 
+            <p class="books__descr text-justify text-base pt-3">{{ shortenedDescription() }} 
               <span> 
                 <button v-if="showFullDescription" @click="toggleDescription"><b>Скрыть</b></button>
                 <button v-else-if="showToggle" @click="toggleDescription"><b>Показать полностью</b></button>
@@ -30,14 +30,14 @@
             </p>
           </div>
           <button 
-            class="border block bg-orange-500 p-2 mt-2 
+            class="border block xs:mx-auto bg-orange-500 p-2 mt-2 
             rounded-md text-slate-50 hover:bg-orange-600 active:bg-orange-700"
             @click="$emit('addToCart', books)">В корзину
           </button>
           <router-view>
             <router-link
               @click="closeInfoModal"
-              class="block rounded-md p-2 w-44 mt-3 text-center
+              class="block xs:mx-auto rounded-md p-2 w-44 mt-3 text-center
              bg-slate-200 hover:bg-slate-300" to="/cart">Перейти в корзину
             </router-link>
           </router-view>
@@ -87,7 +87,6 @@ import { doc, getDoc } from "firebase/firestore"
 import { ref, onMounted } from 'vue'
 import ItemWindow from './ItemWindow.vue'
 import EditBook from './EditBook.vue'
-import { useBooksStore } from '@/stores/books';
 
 const props = defineProps({
     books: {
@@ -116,12 +115,10 @@ const adminEntered = async () => {
 
 const showInfoBook = () => {
   bookInfoVisibility.value = true
-  // document.body.classList.add('modal-open')
 }
 
 const closeInfoModal = () => {
   bookInfoVisibility.value = false
-  // document.body.classList.remove('modal-open')
 }
 
 const shortenedDescription = () => {
@@ -145,4 +142,3 @@ onMounted(() => {
 })
 
 </script>
-

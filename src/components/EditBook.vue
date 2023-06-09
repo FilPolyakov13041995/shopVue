@@ -146,6 +146,18 @@ const removeBook = async () => {
     // Удаляем документ книги из Firestore
     await deleteDoc(bookDocRef)
     console.log(`Книга ${bookId} успешно удалена.`)
+
+    // Обновляем массив books, удаляя удаленную книгу
+    const index = booksStore.books.findIndex(book => book.id === bookId)
+    booksStore.books.splice(index, 1)
+
+    // Обновляем массив filteredBooks, удаляя удаленную книгу
+    const filteredIndex = booksStore.filteredBooks.findIndex(book => book.id === bookId)
+    if (filteredIndex >= 0) {
+      booksStore.filteredBooks.splice(filteredIndex, 1)
+    }
+
+
   } catch (error) {
     console.error(`Ошибка при удалении книги ${bookId}:`, error)
   }
