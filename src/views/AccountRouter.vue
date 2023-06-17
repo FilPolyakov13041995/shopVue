@@ -1,4 +1,4 @@
-<template>
+<template class="md:relative md:min-h-screen">
   <div v-if="!currentUser">
     <div v-if="showLogin">
       <login-form/>
@@ -33,6 +33,7 @@
     @click="logOut">Выйти из аккаунта
     </button>
   </div>
+  <my-footer class="xs:hidden md:block md:absolute md:bottom-0 md:w-full"></my-footer>
 </template>
 
 
@@ -44,8 +45,7 @@ import { ref, onMounted, onBeforeUpdate } from 'vue'
 import SignupForm from '@/components/SignupForm.vue'
 import LoginForm from '@/components/LoginForm.vue'
 import { auth } from '@/firebase'
-import { useLoginStore } from '@/stores/login'
-const loginStore = useLoginStore()
+import MyFooter from '@/components/Footer.vue'
 
 const isLoggedIn = ref(false)
 const showLogin = ref(true)

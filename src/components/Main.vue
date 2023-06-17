@@ -1,6 +1,6 @@
 <template>
 <!-- Меню на маленьких устройствах -->
-<div class="md:hidden fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
+<div class="md:hidden fixed bottom-0 left-0 z-50 w-full h-20 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
     <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
         <router-link to="/" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
             <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
@@ -38,15 +38,17 @@
         <router-link to="/">
             <a href="#"><img class="xs:w-24 md:w-52" src="../assets/SHOP.png" alt="Logo"></a>
         </router-link>
-        <router-link class="xs:hidden md:block border p-3 rounded-xl border-sky-900 hover:bg-gray-100 
+        <router-link class="xs:hidden md:block border p-3 rounded-lg border-gray-400 hover:bg-gray-100 
             ease-in duration-300" to="/catalog">Каталог
         </router-link>
         <div class="relative flex items-center xs:basis-3/5 md:basis-2/5">
             <input
-            @keyup.enter="search"
-            v-model="searchQuery"
-            class="w-full border-none xs:p-2.5 md:p-3.5 text-sm rounded-xl focus:outline-none" 
-            placeholder="Введите название книги">
+                @keyup.enter="search"
+                v-model="searchQuery"
+                name="search"
+                id="search"
+                class="w-full border xs:p-2.5 md:p-3.5 text-sm rounded-lg focus:outline-none" 
+                placeholder="Введите название книги">
             <span
               v-if="searchQuery"
               @click="searchQuery = ''"
@@ -57,16 +59,16 @@
             <span>
                 <button
                     @click="search"
-                    class="xs:p-2.5 md:p-3.5 text-sm font-medium text-white bg-orange-500 rounded-xl hover:bg-orange-400">
+                    class="xs:p-2.5 md:p-3.5 text-sm font-medium text-white bg-orange-500 rounded-lg hover:bg-orange-400">
                     <svg 
                         class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7   7 0 0114 0z"></path>
                     </svg>
                 </button>
             </span>
-        <router-link class="xs:hidden md:block border p-3 rounded-xl border-sky-900 hover:bg-gray-100 
+        <router-link class="xs:hidden md:block border p-3 rounded-lg border-gray-400 hover:bg-gray-100 
             ease-in duration-300" to="/account">Аккаунт
         </router-link>
-        <router-link class=" xs:hidden md:block border p-3 rounded-xl border-sky-900 hover:bg-gray-100 
+        <router-link class=" xs:hidden md:block border p-3 rounded-lg border-gray-400 hover:bg-gray-100 
             ease-in duration-300 relative" to="/cart">Корзина 
             <span v-if="booksStore.cart.length" 
                 class="bg-orange-500 absolute bottom-9 pl-2 pr-2 
@@ -75,12 +77,13 @@
         </router-link>
     </nav>
     <router-view/>
+
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { useRouter } from 'vue-router';
-import { useBooksStore } from '@/stores/books';
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { useBooksStore } from '@/stores/books'
 
 
 const booksStore = useBooksStore()

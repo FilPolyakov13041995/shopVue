@@ -1,12 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Account from '../views/AccountRouter.vue';
-import Cart from '../views/CartRouter.vue';
-import Catalog from '../views/CatalogRouter.vue';
+// import Account from '../views/AccountRouter.vue';
+// import Cart from '../views/CartRouter.vue';
+// import Catalog from '../views/CatalogRouter.vue';
 import HomeRouter from '../views/HomeRouter.vue';
-import AddingBook from '../views/AddingBook.vue';
-import EditBook from '@/components/EditBook.vue';
-// import CatalogItem from '@/components/CatalogItem.vue';
-
+// import AddingBook from '../views/AddingBook.vue';
+// import EditBook from '@/components/EditBook.vue';
 const routes = [
   {
     path: '/',
@@ -16,37 +14,28 @@ const routes = [
   {
     path: '/account',
     name: 'account',
-    component: Account
+    component: () => import('../views/AccountRouter.vue')
   },
   {
     path: '/cart',
     name: 'cart',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: Cart
+    component: () => import('../views/CartRouter.vue')
   },
   {
     path: '/catalog',
     name: 'catalog',
-    component: Catalog
+    component: () => import('../views/CatalogRouter.vue')
   },
   {
     path: '/addingBook',
     name: 'addingBook',
-    component: AddingBook,
+    component: () => import('../views/AddingBook.vue'),
   },
   {
     path: '/edit-book/',
     name: 'editBook',
-    component: EditBook,
-    // path: '/edit-book/:book',
-    // name: 'EditBook',
-    // component: EditBook,
-    // props: (route) => ({
-    //   book: route.params.book,
-    // })
-  },
+    component: () => import('@/components/EditBook.vue'),
+  }
 ];
 
 const router = createRouter({

@@ -7,13 +7,15 @@
           @submit.prevent="signUpStore.signUp"
           class="bg-white shadow-md rounded-xl px-10 pt-6 pb-8 mb-4">
           <div class="mb-6">
-            <label class="block text-gray-700 text-xs font-bold mb-2" for="username">
+            <label class="block text-gray-700 text-xs font-bold mb-2" for="email">
               Email
             </label>
             <input
               v-model="signUpStore.email"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="email"
+              name="email"
+              id="email"
             />
           </div>
           <div class="mb-6">
@@ -24,6 +26,8 @@
               v-model="signUpStore.password"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               type="password"
+              name="password"
+              id="password"
               autocomplete=""
             />
           </div>

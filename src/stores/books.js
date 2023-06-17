@@ -135,5 +135,8 @@ export const useBooksStore = defineStore('booksStore', {
         getSearchQuery(state) { 
             return state.searchQuery
         },
+        discountBooks(state) {
+          return state.books.filter(book => book.sale > 0)
+        }
     },
 });

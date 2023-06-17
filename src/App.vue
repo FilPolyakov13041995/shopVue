@@ -1,12 +1,13 @@
 <template>
-  <Main></Main>
-  
+    <VApp>
+      <Main></Main>
+    </VApp>
 </template>
 
 
 <script setup>
 import Main from './components/Main.vue';
-
+import { VApp } from 'vuetify/lib/components/index.mjs';
 </script>
 
 

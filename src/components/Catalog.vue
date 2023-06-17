@@ -48,7 +48,7 @@
     </div>
   </div>
     <div class="catalog__item flex flex-wrap gap-4 pl-2 pr-2 mb-20">
-      <CatalogItem class="flex-auto w-60 h-2/4"
+      <CatalogItem class="flex-auto w-60 h-2/4 mb-5"
         v-for="book in booksStore.filterBooks"
         :key="book.id"
         :books="book"
@@ -56,6 +56,7 @@
       </CatalogItem>
     </div>
   </div>
+  <MyFooter class="xs:hidden md:block"></MyFooter>
 </template>
 
 <script setup>
@@ -65,6 +66,7 @@ import { doc, getDoc } from "firebase/firestore"
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useBooksStore } from '@/stores/books'
 import CatalogItem from './CatalogItem.vue'
+import MyFooter from  './Footer.vue'
 
 const booksStore = useBooksStore()
 

@@ -1,6 +1,5 @@
 <template>
     <form-adding-books></form-adding-books>
-    
 </template>
 
 <script setup>

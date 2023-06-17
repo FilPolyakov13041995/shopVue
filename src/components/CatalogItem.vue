@@ -4,7 +4,7 @@
     <item-window 
       v-if="bookInfoVisibility"
       @closeModal="closeInfoModal">
-      <div class="xs:text-center md:text-left w-5/6 mx-auto shadow-2xl rounded-lg mt-10 xs:flex xs:flex-col xs:items-center md:flex md:flex-row md:justify-center md:items-stretch gap-3 p-2 mb-28">
+      <div class="xs:text-center md:text-left w-5/6 mx-auto shadow-2xl rounded-lg mt-10 xs:flex xs:flex-col xs:items-center md:flex md:flex-row md:justify-center md:items-stretch gap-3 p-2 xs:mb-40">
         <div class="md:basis-1/5/">
           <img class="xs:w-64 md:w-80" :src="books.image" :alt="books.alt">
         </div>
