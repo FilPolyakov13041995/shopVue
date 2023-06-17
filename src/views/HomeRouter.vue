@@ -13,7 +13,7 @@
         </v-carousel-item>
     </v-carousel>
   </div>
-  <div class="flex flex-row justify-center xs:gap-2 md:gap-10 xs:p-3 md:p-5 bg-orange-100 text-white xs:mb-20 md:mb-0">
+  <div class="flex flex-row justify-center xs:gap-2 md:gap-10 xs:p-3 md:p-5 bg-zinc-50 text-white xs:mb-20 md:mb-0">
     <div class="flex flex-col justify-center items-center xs:w-40 xs:h-40 md:w-48 md:h-48 rounded-xl bg-stone-500 hover:bg-stone-400 p-2">
       <p class="xs:text-1xl md:text-2xl text-center font-mono">Книг в каталоге</p>
       <p class="xs:text-5xl md:text-7xl font-mono">{{ booksStore.books.length }}</p>
