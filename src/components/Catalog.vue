@@ -47,7 +47,7 @@
         </div>
     </div>
   </div>
-    <div class="catalog__item flex flex-wrap gap-4 pl-2 pr-2 mb-20">
+    <div class="catalog__item flex flex-wrap gap-4 pl-2 pr-2 mb-28">
       <CatalogItem class="flex-auto w-60 h-2/4 mb-5"
         v-for="book in booksStore.filterBooks"
         :key="book.id"

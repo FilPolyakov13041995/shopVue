@@ -4,16 +4,16 @@
         <v-carousel-item 
           v-for="(item, i) in booksStore.discountBooks"
           :key="i">
-          <div class="relative">
-            <img class="xs:w-72 md:w-80 h-auto md:p-6 xs:p-3 xs:my-auto mx-auto" :src="item.image"/>
-            <div class="absolute top-1 right-1">
+          <div class="relative mx-auto container__img">
+            <img class="w-full h-full mt-6" :src="item.image"/>
+          </div>
+          <div class="absolute top-2 right-2">
               <img class="w-20" src="../assets/sale-tag-for-online-shops-svgrepo-com.svg" alt="sale"/>
             </div>
-          </div>
         </v-carousel-item>
     </v-carousel>
   </div>
-  <div class="flex flex-row justify-center xs:gap-2 md:gap-10 xs:p-3 md:p-5 bg-zinc-50 text-white xs:mb-20 md:mb-0">
+  <div class="flex flex-row justify-center xs:gap-2 md:gap-10 xs:p-3 md:p-5 bg-zinc-50 text-white xs:mb-20 md:mb-28">
     <div class="flex flex-col justify-center items-center xs:w-40 xs:h-40 md:w-48 md:h-48 rounded-xl bg-stone-500 hover:bg-stone-400 p-2">
       <p class="xs:text-1xl md:text-2xl text-center font-mono">Книг в каталоге</p>
       <p class="xs:text-5xl md:text-7xl font-mono">{{ booksStore.books.length }}</p>
@@ -42,3 +42,10 @@ onMounted(() => {
 })
 
 </script>
+
+<style>
+  .container__img {
+    width: 240px;
+    height: 390px;
+  }
+</style>

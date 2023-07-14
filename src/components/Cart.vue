@@ -13,7 +13,7 @@
           @addCountQty="booksStore.addCountQty"
           @reduceCountQty="booksStore.reduceCountQty">
       </cart-item>
-      <div class="total__cart-item bg-orange-500 w-2/6 rounded-xl text-white mx-auto p-2 mt-4 xs:mb-24 md:mb-32" v-if="booksStore.cart.length">
+      <div class="total__cart-item bg-orange-500 w-2/6 rounded-lg text-white mx-auto p-2 mt-4 xs:mb-24 md:mb-32" v-if="booksStore.cart.length">
         <p class="text-center md:text-3xl xs:text-xl">Итого:</p>
         <p class="text-center text-xl">{{ booksStore.cartTotal }} р.</p>
       </div>
