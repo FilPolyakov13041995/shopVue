@@ -2,6 +2,8 @@ import { defineStore } from "pinia";
 import { auth } from '@/firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 export const useLoginStore = defineStore('LoginStore', {
     state: () => {
         return {
@@ -14,21 +16,28 @@ export const useLoginStore = defineStore('LoginStore', {
     },
     actions: {
       async login() {
+        if (!emailRegex.test(this.email)) {
+          this.errorMessage = 'Недопустимый адрес электронной почты'
+          return
+        }
         try {
           const userCredential = await signInWithEmailAndPassword(auth, this.email, this.password)
           const user = userCredential.user
         }
         catch(error) {
-          if(error.code === 'auth/user-not-found') {
-            error.code = 'Учетная запись не найдена'
-            this.errorMessage = error.code
-          }
-          if(error.code === 'auth/wrong-password') {
-            error.code = 'Неверный пароль'
-            this.errorMessage = error.code
+          switch(error.code) {
+            case 'auth/user-not-found':
+              this.errorMessage = 'Учетная запись не найдена'
+              break
+            case 'auth/wrong-password':
+              this.errorMessage = 'Неверный пароль'
+              break
+            default:
+              this.errorMessage = 'Произошла ошибка при входе'
+              console.error(error)
           }
         }
-      },
+      }
     },
 
     getters: {

@@ -1,6 +1,6 @@
 <template class="md:relative md:min-h-screen">
   <div v-if="!currentUser">
-    <div v-if="showLogin">
+    <div class="mb-40" v-if="showLogin">
       <login-form/>
       <p class="text-center">Еще нет аккаунта? 
         <span 
@@ -9,7 +9,7 @@
         </span> сейчас.
       </p>
     </div>
-    <div v-else>
+    <div class="mb-40" v-else>
       <signup-form/>
       <p class="text-center">Уже есть аккаунт? 
         <span 
@@ -29,11 +29,11 @@
         <img class="w-28 h-28 mt-4 mb-4 mx-auto" src="../assets/user.jpg" alt="user">
       </div>
     <button
-    class="block mt-3 mx-auto px-8 py-3 text-white bg-orange-500 hover:bg-orange-400 rounded-xl text-base"
+    class="block mt-3 mx-auto px-8 py-3 text-white bg-orange-500 hover:bg-orange-400 rounded-xl text-base mb-28"
     @click="logOut">Выйти из аккаунта
     </button>
   </div>
-  <my-footer class="xs:hidden md:block md:absolute md:bottom-0 md:w-full"></my-footer>
+  <my-footer class="xs:hidden md:block"></my-footer>
 </template>
 
 

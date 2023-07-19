@@ -47,14 +47,14 @@
         </div>
     </div>
   </div>
-    <div class="catalog__item flex flex-wrap gap-4 pl-2 pr-2 mb-28">
-      <CatalogItem class="flex-auto w-60 h-2/4 mb-5"
-        v-for="book in booksStore.filterBooks"
-        :key="book.id"
-        :books="book"
-        @addToCart="booksStore.addToCart">
-      </CatalogItem>
-    </div>
+  <div class="flex flex-wrap gap-4 justify-center mb-28">
+  <CatalogItem class="mb-5"
+    v-for="book in booksStore.filterBooks"
+    :key="book.id"
+    :books="book"
+    @addToCart="booksStore.addToCart">
+  </CatalogItem>
+</div>
   </div>
   <MyFooter class="xs:hidden md:block"></MyFooter>
 </template>
@@ -69,7 +69,6 @@ import CatalogItem from './CatalogItem.vue'
 import MyFooter from  './Footer.vue'
 
 const booksStore = useBooksStore()
-
 
 const currentCategory = ref('Выбрать категорию')
 const currentSort = ref('Сортировать')
