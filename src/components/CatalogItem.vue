@@ -54,7 +54,7 @@
                 <p class="text-xl text-red-500">{{ books.discountPrice }}</p>
                 <p class="text-lg line-through text-slate-600"><b>{{ books.price }} руб.</b></p>
               </div>
-              <p class="circle absolute bottom-0 right-1">- {{ books.sale }}%</p>
+              <p class="circle absolute bottom-0 right-1">&#8211;{{ books.sale }}%</p>
             </div>
             <div v-else>
               <p class="text-lg"><b>{{ books.price }} руб.</b></p>
@@ -145,7 +145,7 @@ onMounted(() => {
 <style>
   .cartItem {
     width: 350px;
-    max-height: 570px;
+    min-height: 500px;
   }
   .circle {
   width: 50px;

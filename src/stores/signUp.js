@@ -15,35 +15,6 @@ export const useSignUpStore = defineStore('signUpStore', {
         }
     },
     actions: {
-      // async signUp() {
-      //   if (this.password !== this.confirmPassword) {
-      //     this.errorMessage = 'Пароли не совпадают';
-      //     return;
-      //   }
-      //   try {
-      //     const userCredential = await createUserWithEmailAndPassword(auth, this.email, this.password)
-      //     const user = userCredential.user
-      //     await addDoc(collection(db, 'users'), {
-      //       email: user.email,
-      //       uid: user.uid,
-      //       isAdmin: false
-      //     })
-      //   } 
-      //   catch(error) {
-      //     if(error.code === 'auth/invalid-email') {
-      //       error.code = 'Некорректный формат электронной почты'
-      //       this.errorMessage = error.code
-      //     }
-      //     if(error.code === 'auth/weak-password') {
-      //       error.code = 'Пароль должен быть длиннее 6 символов'
-      //       this.errorMessage = error.code
-      //     }
-      //     if(error.code === 'auth/email-already-in-use') {
-      //       error.code = 'Уже есть пользователь с таким же адресом электронной почты'
-      //       this.errorMessage = error.code
-      //     }
-      //   }
-      // }
       async signUp() {
         if (this.password !== this.confirmPassword) {
           this.errorMessage = 'Пароли не совпадают';
@@ -73,9 +44,6 @@ export const useSignUpStore = defineStore('signUpStore', {
               console.error(error);
           }
         }
-      }
-    },
-    getters: {
-        
+      },
     },
 });

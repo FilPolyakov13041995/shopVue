@@ -1,10 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-// import Account from '../views/AccountRouter.vue';
-// import Cart from '../views/CartRouter.vue';
-// import Catalog from '../views/CatalogRouter.vue';
 import HomeRouter from '../views/HomeRouter.vue';
-// import AddingBook from '../views/AddingBook.vue';
-// import EditBook from '@/components/EditBook.vue';
 const routes = [
   {
     path: '/',

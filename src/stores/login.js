@@ -15,6 +15,7 @@ export const useLoginStore = defineStore('LoginStore', {
         }
     },
     actions: {
+
       async login() {
         if (!emailRegex.test(this.email)) {
           this.errorMessage = 'Недопустимый адрес электронной почты'
@@ -22,7 +23,6 @@ export const useLoginStore = defineStore('LoginStore', {
         }
         try {
           const userCredential = await signInWithEmailAndPassword(auth, this.email, this.password)
-          const user = userCredential.user
         }
         catch(error) {
           switch(error.code) {
@@ -37,10 +37,6 @@ export const useLoginStore = defineStore('LoginStore', {
               console.error(error)
           }
         }
-      }
+      },
     },
-
-    getters: {
-        
-    }
 });

@@ -16,7 +16,7 @@
             </div>
             <p class="border py-2 px-3.5 text-center outline-none">{{ cartItem.quantity }}</p>
             <div
-                @click="$emit('addCountQty', cartItem)" 
+                @click="$emit('addCountQty', cartItem)"
                 class="border py-2 px-3.5 cursor-pointer bg-gray-100 hover:bg-gray-200 rounded-r">
                 +
             </div>

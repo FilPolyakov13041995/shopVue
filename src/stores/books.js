@@ -26,26 +26,6 @@ export const useBooksStore = defineStore('booksStore', {
     },
     actions: {
         getBooks() {
-            // Этот метод БЕЗ обновления данных в реальном времени, и работает С async
-            // const querySnapshot = await getDocs(collection(db, 'books'))
-            // let fbBooks = []
-            // querySnapshot.forEach((val) => {
-            //     const book = {
-            //       id: val.id,
-            //       title: val.data().title,
-            //       author: val.data().author,
-            //       year: val.data().year,
-            //       price: val.data().price,
-            //       quantity: val.data().quantity,
-            //       category: val.data().category,
-            //       image: val.data().image,
-            //       description: val.data().description,
-            //       alt: val.data().alt
-            //     }
-            //     fbBooks.push(book)
-            //   })
-            //   this.books = fbBooks
-
             // Этот метод С обновлением данных в реальном времени и работает БЕЗ async
             onSnapshot(collection(db, 'books'), (querySnapshot) => {
                 const fbBooks = []
