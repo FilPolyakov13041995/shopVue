@@ -29,18 +29,24 @@
               </span>
             </p>
           </div>
-          <button 
-            class="border block bg-orange-500 p-2 mt-2 
+          <div class="flex gap-2">
+            <button
+            class="block bg-orange-500 p-2 mt-2 
             rounded-md text-slate-50 hover:bg-orange-600 active:bg-orange-700"
             @click="$emit('addToCart', books)">В корзину
           </button>
-          <router-view>
+          <router-view v-if="booksStore.cart.length">
             <router-link
+              class="text-black block bg-slate-200 p-2 mt-2 
+              rounded-md hover:bg-slate-300 cart-button"
               @click="closeInfoModal"
-              class="block rounded-md p-2 w-44 mt-3 text-center
-             bg-slate-200 hover:bg-slate-300" to="/cart">Перейти в корзину
+              to="/cart"
+              style="transition: opacity 0.5s ease-in-out;"
+              >
+              Перейти в корзину
             </router-link>
           </router-view>
+          </div>
         </div>
       </div>
     </item-window>
@@ -63,11 +69,11 @@
           <img class="w-40 h-64 mx-auto" :src="books.image" :alt="books.alt">
           <div class="btn__control p-4 flex flex-col justify-center">
             <button 
-              class="border p-1 bg-orange-500 mt-3 rounded-md 
+              class="p-1 bg-orange-500 mt-3 rounded-md 
               w-48 mx-auto text-slate-50 hover:bg-orange-600 active:bg-orange-700"
               @click="$emit('addToCart', books)">Добавить в корзину
             </button>
-            <button class="border p-1 bg-blue-700 mt-3 rounded-md 
+            <button class="p-1 bg-blue-700 mt-3 rounded-md 
               w-48 mx-auto text-slate-50 hover:bg-blue-600 active:bg-blue-900" 
               @click="showInfoBook">Просмотр товара
             </button>
@@ -82,9 +88,11 @@
 import { db } from '@/firebase'
 import { auth } from '@/firebase'
 import { doc, getDoc } from "firebase/firestore"
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch, computed } from 'vue'
 import ItemWindow from './ItemWindow.vue'
 import EditBook from './EditBook.vue'
+import { useBooksStore } from '@/stores/books'
+const booksStore = useBooksStore()
 
 const props = defineProps({
     books: {
@@ -158,6 +166,19 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
 }
-</style>
 
-<!-- class="text-lg text-white bg-red-400 rounded-lg pl-1 pr-1 w-16 mx-auto" -->
+.cart-button {
+  animation: fade-in 0.5s ease-in-out;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>

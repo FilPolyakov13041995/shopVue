@@ -28,7 +28,7 @@
             <p class="text-lg mt-1">{{ cartItem.price * cartItem.quantity }} р.</p>
         </div>
         <button 
-          class="border bg-red-600 rounded-md text-slate-50 mt-1 
+          class="bg-red-600 rounded-md text-slate-50 mt-1 
           p-1 hover:bg-red-500 active:bg-red-600"
           @click="$emit('removeCartItem', index)">Удалить
         </button>
