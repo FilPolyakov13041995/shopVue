@@ -3,17 +3,15 @@
     <h2 class="xs:text-xl xs:text-center md:text-2xl p-2 bg-sky-800 text-white">Каталог товаров</h2>
     <div v-if="!searchQuery.length" class="filter flex p-2 justify-center xs:flex-col xs:items-center md:flex-row">
       <div class="p-2 relative">
-        <router-view>
-          <router-link to="/addingBook">
-            <button 
-              :disabled="!isAdminEntered"
-              class="text-base text-center cursor-pointer bg-teal-400 font-medium w-60 rounded-md hover:bg-teal-300 mobile-tooltip"
-              :class="{ 'bg-teal-800 hover:bg-teal-700 text-slate-200': !isAdminEntered }"
-              :title="!isAdminEntered ? 'Вы должны войти как администратор, чтобы добавить книгу' : '' ">
-              Добавить книгу в каталог
-            </button>
-          </router-link>
-        </router-view>
+        <button
+          @click="goToAddingBook"
+          :disabled="!isAdminEntered"
+          class="text-base text-center cursor-pointer bg-teal-400 font-medium w-60 rounded-md hover:bg-teal-300 tooltip"
+          :class="{ 'bg-teal-800 hover:bg-teal-700 text-slate-200 cursor': !isAdminEntered }"
+          >
+          <span class="tooltiptext" v-if="!isAdminEntered">Вы должны войти как администратор, чтобы добавить книгу</span>
+          Добавить книгу в каталог
+        </button>
       </div>
       <div class="select p-2 relative z-10">
         <p @click="isCategoriesVisible = !isCategoriesVisible"
@@ -64,10 +62,12 @@ import { db } from '@/firebase'
 import { auth } from '@/firebase'
 import { doc, getDoc } from "firebase/firestore"
 import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { useRouter } from 'vue-router'
 import { useBooksStore } from '@/stores/books'
 import CatalogItem from './CatalogItem.vue'
 import MyFooter from  './Footer.vue'
 
+const router = useRouter()
 const booksStore = useBooksStore()
 
 const currentCategory = ref('Выбрать категорию')
@@ -77,6 +77,9 @@ const isSortVisible = ref(false)
 const isAdminEntered = ref(false)
 const searchQuery = computed(() => booksStore.getSearchQuery)
 
+const goToAddingBook = () => {
+  router.push('/addingBook')
+}
 
 const hideSelect = () => {
     isCategoriesVisible.value = false
@@ -172,29 +175,31 @@ const adminEntered = async () => {
 </script>
 
 
-<style>
-  /* Стили для всплывающей подсказки на мобильных устройствах */
-  @media only screen and (max-width: 767px) {
-    .mobile-tooltip {
-      position: relative;
-    }
-    .mobile-tooltip::after {
-      content: attr(title);
-      position: absolute;
-      bottom: calc(100% + 0.5rem);
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #b74848;
-      color: #fff;
-      padding: 0.25rem 0.5rem;
-      font-size: 0.75rem;
-      border-radius: 0.25rem;
-      white-space: nowrap;
-      opacity: 0;
-      transition: opacity 0.3s ease-in-out;
-    }
-    .mobile-tooltip:hover::after {
-      opacity: 1;
-    }
+<style scoped>
+  .cursor {
+    cursor: not-allowed;
+  }
+  .tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  .tooltip .tooltiptext {
+    font-size: 12px;
+    width: 350px;
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    z-index: 1;
+    left: -50px;
+    top: -30px;
+    background-color: rgb(250, 101, 101);
+    color: white;
+    border-radius: 6px;
+    transition: opacity 0.3s, visibility 0s linear 0.3s;
+  }
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
   }
 </style>

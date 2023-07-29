@@ -35,17 +35,16 @@
             rounded-md text-slate-50 hover:bg-orange-600 active:bg-orange-700"
             @click="$emit('addToCart', books)">В корзину
           </button>
-          <router-view v-if="booksStore.cart.length">
-            <router-link
-              class="text-black block bg-slate-200 p-2 mt-2 
-              rounded-md hover:bg-slate-300 cart-button"
-              @click="closeInfoModal"
-              to="/cart"
-              style="transition: opacity 0.5s ease-in-out;"
+          <button
+              class="text-black block bg-slate-200 cursor-pointer p-2 mt-2 rounded-md hover:bg-slate-300 relative tooltip"
+              :class="{ 'opacity-50': booksStore.cart.length === 0 }"
+              :disabled="booksStore.cart.length === 0"
+              @click="goToCart(closeInfoModal)"
               >
+              <span class="tooltiptext" v-if="booksStore.cart.length === 0">Корзина пуста</span> 
               Перейти в корзину
-            </router-link>
-          </router-view>
+              <span v-if="booksStore.cart.length" class="absolute top-0 right-0 bg-orange-500 text-white rounded-full px-2 py-1 transform translate-x-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center text-sm">{{ booksStore.cart.length }}</span>
+          </button>
           </div>
         </div>
       </div>
@@ -90,10 +89,12 @@ import { db } from '@/firebase'
 import { auth } from '@/firebase'
 import { doc, getDoc } from "firebase/firestore"
 import { ref, onMounted, watch, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import ItemWindow from './ItemWindow.vue'
 import EditBook from './EditBook.vue'
 import { useBooksStore } from '@/stores/books'
 const booksStore = useBooksStore()
+const router = useRouter()
 
 const props = defineProps({
     books: {
@@ -102,6 +103,13 @@ const props = defineProps({
       default: () => {},
     },
 })
+
+const goToCart = (closeInfoModal) => {
+  if(booksStore.cart.length > 0) {
+    closeInfoModal()
+    router.push('/cart')
+  }
+}
 
 const emits = defineEmits(['addToCart'])
 const bookInfoVisibility = ref(false)
@@ -151,7 +159,7 @@ onMounted(() => {
 </script>
 
 
-<style>
+<style scoped>
   .cartItem {
     width: 350px;
     min-height: 500px;
@@ -171,7 +179,10 @@ onMounted(() => {
 .cart-button {
   animation: fade-in 0.5s ease-in-out;
 }
-
+.opacity-50 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 @keyframes fade-in {
   0% {
     opacity: 0;
@@ -182,4 +193,27 @@ onMounted(() => {
     transform: translateY(0);
   }
 }
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+.tooltip .tooltiptext {
+  width: 150px;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  background-color: rgb(225, 29, 29);
+  color: white;
+  border-radius: 6px;
+  transition: opacity 0.3s, visibility 0s linear 0.3s;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
 </style>
+
+
