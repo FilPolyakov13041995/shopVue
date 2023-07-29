@@ -46,6 +46,8 @@ import SignupForm from '@/components/SignupForm.vue'
 import LoginForm from '@/components/LoginForm.vue'
 import { auth } from '@/firebase'
 import MyFooter from '@/components/Footer.vue'
+import { useLoginStore } from '@/stores/login'
+const loginStore = useLoginStore()
 
 const isLoggedIn = ref(false)
 const showLogin = ref(true)
@@ -82,6 +84,8 @@ function logOut() {
         isAdmin: false
       })
     })
+    loginStore.notRegistered = ''
+    loginStore.incorrectPassword = ''
 }
 
 function setupAuthListener() {

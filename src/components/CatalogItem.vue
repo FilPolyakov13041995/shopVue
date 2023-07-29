@@ -73,7 +73,8 @@
               w-48 mx-auto text-slate-50 hover:bg-orange-600 active:bg-orange-700"
               @click="$emit('addToCart', books)">Добавить в корзину
             </button>
-            <button class="p-1 bg-blue-700 mt-3 rounded-md 
+            <button
+              class="p-1 bg-blue-700 mt-3 rounded-md 
               w-48 mx-auto text-slate-50 hover:bg-blue-600 active:bg-blue-900" 
               @click="showInfoBook">Просмотр товара
             </button>

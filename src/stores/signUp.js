@@ -7,19 +7,18 @@ import { collection, addDoc } from 'firebase/firestore';
 export const useSignUpStore = defineStore('signUpStore', {
     state: () => {
         return {
-          displayName: '',
           email: '',
           password: '',
           confirmPassword: '',
-          errorMessage: ''
+          emailError: '',
+          passwordError: '',
+          passwordConfirmationError: '',
+          errorMessage: '',
+          buttonDisabled: false
         }
     },
     actions: {
       async signUp() {
-        if (this.password !== this.confirmPassword) {
-          this.errorMessage = 'Пароли не совпадают';
-          return;
-        }
         try {
           const userCredential = await createUserWithEmailAndPassword(auth, this.email, this.password);
           const user = userCredential.user;
@@ -30,17 +29,11 @@ export const useSignUpStore = defineStore('signUpStore', {
           });
         } catch(error) {
           switch(error.code) {
-            case 'auth/invalid-email':
-              this.errorMessage = 'Недопустимый адрес электронной почты';
-              break;
-            case 'auth/weak-password':
-              this.errorMessage = 'Пароль должен быть длиннее 6 символов';
-              break;
             case 'auth/email-already-in-use':
-              this.errorMessage = 'Уже есть пользователь с таким же адресом электронной почты';
+              this.errorMessage = 'Такой пользователь уже существует';
               break;
             default:
-              this.errorMessage = 'Произошла ошибка при регистрации пользователя';
+              this.errorMessage = 'Произошла ошибка при регистрации';
               console.error(error);
           }
         }
