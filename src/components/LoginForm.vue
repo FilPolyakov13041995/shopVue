@@ -16,7 +16,7 @@
                 type="email"
                 name="email"
                 id="email"
-                @blur="valEmail()"
+                @blur="validationEmail()"
               />
               <div v-if="loginStore.emailError" class="text-red-500 text-xs p-1 absolute">{{ loginStore.emailError }}</div>
               <div v-else-if="loginStore.notRegistered" class="text-red-500 text-xs p-1 absolute">{{ loginStore.notRegistered }}</div>
@@ -32,7 +32,7 @@
                 type="password"
                 name="password"
                 id="password"
-                @blur="valPassword()"
+                @blur="validationPassword()"
               />
               <div v-if="loginStore.passwordError" class="text-red-500 text-xs p-1 absolute">{{ loginStore.passwordError }}</div>
               <div v-else-if="loginStore.incorrectPassword" class="text-red-500 text-xs p-1 absolute">{{ loginStore.incorrectPassword }}</div>
@@ -58,11 +58,11 @@ const loginStore = useLoginStore()
 
 const disBtn = ref(false)
 
-const valEmail = () => {
+const validationEmail = () => {
   loginStore.emailError = validateEmail(loginStore.email);
 }
 
-const valPassword = () => {
+const validationPassword = () => {
   loginStore.passwordError = validatePasswordLength(loginStore.password);
 }
 

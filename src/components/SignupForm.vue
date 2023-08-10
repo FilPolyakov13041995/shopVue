@@ -16,7 +16,7 @@
               type="email"
               name="email"
               id="email"
-              @blur="valEmail()"
+              @blur="validationEmail()"
             />
             <div v-if="signUpStore.emailError" class="text-red-500 text-xs p-1 absolute">{{ signUpStore.emailError }}</div>
             <div v-else-if="signUpStore.errorMessage" class="text-red-500 text-xs p-1 absolute">{{ signUpStore.errorMessage }}</div>
@@ -32,7 +32,7 @@
               type="password"
               name="password"
               id="password"
-              @blur="valPassword()"
+              @blur="validationPassword()"
             />
             <div v-if="signUpStore.passwordError" class="text-red-500 text-xs p-1 absolute">{{ signUpStore.passwordError }}</div>
           </div>
@@ -47,9 +47,9 @@
               type="password"
               name="confirmPassword"
               id="confirmPassword"
-              @blur="valPassword()"
+              @blur="validationPassword()"
             />
-            <div v-if="signUpStore.passwordConfirmationError" class="text-red-500 text-xs p-1 absolute">{{ signUpStore.passwordConfirmationError }}</div>
+            <div v-if="signUpStore.passwordConfirmationError && signUpStore.confirmPassword !== ''" class="text-red-500 text-xs p-1 absolute">{{ signUpStore.passwordConfirmationError }}</div>
           </div>
           <div class="flex items-center justify-between">
             <button
@@ -73,11 +73,11 @@ const signUpStore = useSignUpStore()
 
 const disBtn = ref(false)
 
-const valEmail = () => {
+const validationEmail = () => {
   signUpStore.emailError = validateEmail(signUpStore.email);
 }
 
-const valPassword = () => {
+const validationPassword = () => {
   signUpStore.passwordError = validatePassword(signUpStore.password, signUpStore.confirmPassword);
   signUpStore.passwordConfirmationError = signUpStore.passwordError;
 }
