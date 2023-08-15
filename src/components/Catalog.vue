@@ -116,7 +116,6 @@ const filterByCategory = (category) => {
   currentCategory.value = category
 }
 
-
 const sortAscendingPrice = () => {
   if(booksStore.filteredBooks.length) {
     booksStore.filteredBooks.sort((a, b) => a.discountPrice - b.discountPrice)

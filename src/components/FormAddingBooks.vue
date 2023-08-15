@@ -143,10 +143,3 @@ onMounted(() => {
 
 </script>
 
-
-<style>
-
-body.modal-open {
-  overflow: hidden;
-}
-</style>

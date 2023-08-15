@@ -36,8 +36,7 @@
 </template>
 
 <script setup>
-import { useBooksStore } from '@/stores/books';
-const booksStore = useBooksStore()
+
 const props = defineProps({
     cartItem: Object,
     required: true,

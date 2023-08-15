@@ -29,5 +29,4 @@ import { useBooksStore } from '@/stores/books';
 import CartItem from './CartItem.vue';
 const booksStore = useBooksStore()
 
-
 </script>

@@ -81,7 +81,6 @@ const confirmWindow = ref(false)
 
 const isLoading = ref(false)
 
-
 const props = defineProps({
   books: {
     type: Object,
@@ -89,7 +88,6 @@ const props = defineProps({
     default: () => {},
   },
 })
-
 
 const onFileChange = (event) => {
   booksStore.file = event.target.files[0]
@@ -169,8 +167,6 @@ const removeBook = async () => {
     if (filteredIndex >= 0) {
       booksStore.filteredBooks.splice(filteredIndex, 1)
     }
-
-
   } catch (error) {
     console.error(`Ошибка при удалении книги ${bookId}:`, error)
   }
