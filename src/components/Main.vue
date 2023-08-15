@@ -4,28 +4,28 @@
     <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
         <router-link to="/" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
             <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-                <img class="w-6 h-6" src="../assets/house-svgrepo-com.svg" alt="home">
+                <img class="w-6 h-6" src="../assets/icons/house-svgrepo-com.svg" alt="home">
                 <span class="text-sm text-gray-800 dark:text-gray-400">Главная</span>
             </button>
         </router-link>
         
         <router-link to="/catalog" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
             <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-                <img class="w-6 h-6" src="../assets/book-closed-svgrepo-com.svg" alt="catalog">
+                <img class="w-6 h-6" src="../assets/icons/book-closed-svgrepo-com.svg" alt="catalog">
             <span class="text-sm text-gray-800 dark:text-gray-400">Каталог</span>
         </button>
         </router-link>
 
         <router-link to="/account" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
             <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <img class="w-6 h-6" src="../assets/man-svgrepo-com.svg" alt="account">
+            <img class="w-6 h-6" src="../assets/icons/man-svgrepo-com.svg" alt="account">
             <span class="text-sm text-gray-800 dark:text-gray-400">Аккаунт</span>
             </button>
         </router-link>
         
         <router-link to="/cart" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
             <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-                <img class="w-6 h-6" src="../assets/trashcan-svgrepo-com.svg" alt="cart">
+                <img class="w-6 h-6" src="../assets/icons/trashcan-svgrepo-com.svg" alt="cart">
             <span class="text-sm text-gray-800 dark:text-gray-400">Корзина</span>
             </button>
         </router-link>
@@ -36,7 +36,7 @@
 <!-- Меню на больших устройствах -->
     <nav class="header bg-slate-300 flex flex-row xs:gap-2 md:gap-4 items-center justify-center px-4 py-2">
         <router-link to="/">
-            <a href="#"><img class="xs:w-24 md:w-52" src="../assets/SHOP.png" alt="Logo"></a>
+            <a href="#"><img class="xs:w-24 md:w-52" src="../assets/images/SHOP.png" alt="Logo"></a>
         </router-link>
         <router-link class="xs:hidden md:block border p-3 rounded-lg border-gray-400 hover:bg-gray-100 
             ease-in duration-300" to="/catalog">Каталог

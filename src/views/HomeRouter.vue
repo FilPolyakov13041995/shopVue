@@ -8,7 +8,7 @@
             <img class="w-full h-full mt-6" :src="item.image"/>
           </div>
           <div class="absolute top-2 right-2">
-              <img class="w-20" src="../assets/sale-tag-for-online-shops-svgrepo-com.svg" alt="sale"/>
+              <img class="w-20" src="../assets/icons/sale-tag-for-online-shops-svgrepo-com.svg" alt="sale"/>
             </div>
         </v-carousel-item>
     </v-carousel>

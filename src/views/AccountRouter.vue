@@ -26,7 +26,7 @@
         <p class="text-lg">Ваша почта: <b><span class="text-xl pl-1 pr-1 ml-2 rounded-lg">{{ email }}</span></b></p>
         <p class="text-lg">Имя пользователя: <b><span class="text-xl pl-1 pr-1 ml-2 rounded-sm">{{ username }}</span></b></p>
         <p class="text-lg">Статус пользователя: <b><span class="text-lg pl-1 pr-1 ml-2 rounded-sm">{{ userStatus }}</span></b></p>
-        <img class="w-28 h-28 mt-4 mb-4 mx-auto" src="../assets/user.jpg" alt="user">
+        <img class="w-28 h-28 mt-4 mb-4 mx-auto" src="../assets/images/user.jpg" alt="user">
       </div>
     <button
     class="block mt-3 mx-auto px-8 py-3 text-white bg-orange-500 hover:bg-orange-400 rounded-xl text-base mb-28"
