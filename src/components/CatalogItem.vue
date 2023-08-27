@@ -88,7 +88,7 @@
 import { db } from '@/firebase'
 import { auth } from '@/firebase'
 import { doc, getDoc } from "firebase/firestore"
-import { ref, onMounted, watch, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import ItemWindow from './ItemWindow.vue'
 import EditBook from './EditBook.vue'
@@ -111,7 +111,6 @@ const goToCart = (closeInfoModal) => {
   }
 }
 
-const emits = defineEmits(['addToCart'])
 const bookInfoVisibility = ref(false)
 const showFullDescription = ref(false)
 const showToggle = ref(false)
@@ -176,9 +175,6 @@ onMounted(() => {
   align-items: center;
 }
 
-.cart-button {
-  animation: fade-in 0.5s ease-in-out;
-}
 .opacity-50 {
   opacity: 0.5;
   cursor: not-allowed;

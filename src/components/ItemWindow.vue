@@ -15,7 +15,6 @@
 
 <script setup>
 import { onMounted, onBeforeUnmount } from 'vue';
-const emits = defineEmits(['closeModal'])
 
 let scrollPosition = null;
 
@@ -26,7 +25,6 @@ onMounted(() => {
   document.documentElement.style.overflow = 'hidden';
 })
 
-
 onBeforeUnmount(() => {
   // восстанавливаем позицию прокрутки при удалении компонента
   window.scrollTo(0, scrollPosition);
@@ -35,7 +33,6 @@ onBeforeUnmount(() => {
   document.documentElement.style.overflow = '';
 });
 </script>   
-
 
 <style scoped>
 .modal__header {

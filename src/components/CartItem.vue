@@ -43,6 +43,4 @@ const props = defineProps({
     default: () => {},
 })
 
-const emits = defineEmits(['removeCartItem', 'addCountQty', 'reduceCountQty'])
-
 </script>
