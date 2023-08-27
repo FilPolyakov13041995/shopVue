@@ -10,7 +10,7 @@
       </div>
       <div
         class="text-black">
-        © 2023 Copyright:
+          &copy; 2023 Copyright:
         <a
           href="https://github.com/FilPolyakov13041995" target="_blank"
           >Filipp Polyakov</a
