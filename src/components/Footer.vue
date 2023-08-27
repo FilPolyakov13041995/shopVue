@@ -10,7 +10,7 @@
       </div>
       <div
         class="text-black">
-          &copy; 2023 Copyright:
+          &copy; {{ year }} Copyright:
         <a
           href="https://github.com/FilPolyakov13041995" target="_blank"
           >Filipp Polyakov</a
@@ -18,3 +18,10 @@
       </div>
     </footer>
 </template>
+
+<script setup>
+
+import { ref } from 'vue';
+const year = ref(new Date().getFullYear());
+
+</script>
