@@ -94,11 +94,6 @@ const searchQuery = computed({
   set: (value) => booksStore.setSearchQuery(value)
 })
 
-// const search = () => {
-//     if(booksStore.searchQuery !== '') {
-//         router.push('/catalog')
-//     } 
-// }
 const search = () => {
     if (booksStore.searchQuery === '') return
     router.push('/catalog')
