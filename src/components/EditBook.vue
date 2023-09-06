@@ -185,7 +185,6 @@ const adminEntered = async () => {
 
 const showDeleteBlock = () => {
   confirmWindow.value = !confirmWindow.value
-  // document.body.classList.add('modal-open')
 }
 
 const showBookChangeOptions = () => {
