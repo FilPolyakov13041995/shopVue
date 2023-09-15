@@ -3,6 +3,9 @@ node_modules
 /dist
 db.json
 package-lock.json
+coverage
+jest.config.js
+.nycrc
 
 # local env files
 .env.local
